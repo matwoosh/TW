@@ -14,8 +14,8 @@ public class Consumer implements Runnable {
     }
 
     public void run() {
-        notifyWait();
-        //checkIfEmpty();
+        //notifyWait();
+        checkIfEmpty();
     }
 
     public void notifyWait(){
@@ -34,7 +34,7 @@ public class Consumer implements Runnable {
                 }
             }
         }
-        System.out.println("Consumer thread terminated");
+        System.out.println("Consumer thread terminated" + "(" + id + ")");
     }
 
     public void checkIfEmpty(){
@@ -49,10 +49,10 @@ public class Consumer implements Runnable {
             }
             String message = buffer.take();
             buffer.put(null);
-            System.out.println("Consumer" + this.id + " taking " + message);
+            System.out.println("Consumer " + this.id + " taking " + message);
 
         }
-        System.out.println("Consumer" + this.id + " thread terminated");
+        System.out.println("Consumer " + this.id + " thread terminated");
     }
 }
 

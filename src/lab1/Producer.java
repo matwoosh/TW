@@ -14,8 +14,8 @@ public class Producer implements Runnable {
     }
 
     public void run() {
-        notifyWait();
-        //checkIfEmpty();
+        //notifyWait();
+        checkIfEmpty();
     }
 
     public void notifyWait(){
@@ -31,7 +31,7 @@ public class Producer implements Runnable {
                 }
             }
         }
-        System.out.println("Producer thread terminated");
+        System.out.println("Producer thread terminated" + "(" + id + ")");
     }
 
     public void checkIfEmpty(){
@@ -44,7 +44,7 @@ public class Producer implements Runnable {
                     e.printStackTrace();
                 }
             }
-            System.out.println("Producer" +
+            System.out.println("Producer " +
                     this.id +
                     " buffer: " +
                     buffer.take());
@@ -53,10 +53,10 @@ public class Producer implements Runnable {
             buffer.incMessageNo();
             buffer.put("message " + i);
             buffer.notify();
-            System.out.println("Producer" + this.id + " putting message" + i);
+            System.out.println("Producer " + this.id + " putting message " + i);
 
         }
-        System.out.println("Producer" + this.id + " thread terminated");
+        System.out.println("Producer " + this.id + " thread terminated");
     }
 }
 

@@ -6,7 +6,7 @@ package lab1;
 public class Lunch {
     public static void spawnAndRun() {
         Buffer buffer = new Buffer();
-        int threadsNo = 3;
+        int threadsNo = 8;
         for (int i = 0; i < threadsNo; i++) {
             String id = Integer.toString(i);
             Producer p = new Producer(buffer, id);

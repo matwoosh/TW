@@ -31,32 +31,27 @@ public class Producer implements Runnable {
                 }
             }
         }
-        System.out.println("Producer thread terminated" + "(" + id + ")");
+        System.out.println("+Producer thread terminated" + "(" + id + ")");
     }
 
     public void checkIfEmpty(){
         synchronized(buffer){
             while (!(buffer.take() == null)){
                 try {
-                    buffer.notifyAll();
                     buffer.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            System.out.println("Producer " +
-                    this.id +
-                    " buffer: " +
-                    buffer.take());
 
             int i = buffer.getMessageNo();
             buffer.incMessageNo();
             buffer.put("message " + i);
-            buffer.notify();
-            System.out.println("Producer " + this.id + " putting message " + i);
+            buffer.notifyAll();
+            System.out.println("+Producer " + this.id + " putting message " + i);
 
         }
-        System.out.println("Producer " + this.id + " thread terminated");
+        System.out.println("+Producer " + this.id + " thread terminated");
     }
 }
 

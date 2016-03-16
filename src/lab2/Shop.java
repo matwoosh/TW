@@ -5,7 +5,7 @@ package lab2;
  */
 public class Shop {
     protected static final CountingSemaphore countingSemaphore = new CountingSemaphore(
-            3);
+            8);
 
     static class Customer extends Thread {
         private String id;

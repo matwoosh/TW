@@ -1,4 +1,4 @@
-package lab2;
+package lab2.zad1i2;
 
 public class BinarySemaphore {
     private boolean locked = false;

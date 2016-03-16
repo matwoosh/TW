@@ -1,4 +1,4 @@
-package lab2;
+package lab2.zad1i2;
 
 /**
  * Created by Mateusz on 13/03/2016.

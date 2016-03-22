@@ -10,17 +10,19 @@ public class Customer extends Thread{
 
     int n;
     Shop shop;
+    int id;
 
-    public Customer(int n, Shop shop) {
+    public Customer(int n, Shop shop, int id) {
         this.n = n;
         this.shop = shop;
+        this.id = id;
     }
       
     public void run(){
         while(n>0){
             n--;
-            shop.in();
-            shop.out();
+            shop.getIn(id);
+            shop.getOut(id);
         }
     }
     

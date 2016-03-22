@@ -15,13 +15,13 @@ public class Shop {
        this.s2 = s2;
     }
     
-    public void in(){
-        s1.P();
-        s2.V();
+    public void getIn(int id){
+        s1.P(id);
+        s2.V(id);
     }
     
-    public void out(){
-        s2.P();
-        s1.V();
+    public void getOut(int id){
+        s2.P(id);
+        s1.V(id);
     }
 }

@@ -10,10 +10,10 @@ public class Semaphore {
     int value;
 
     Semaphore(int initial){
-        value = initial;
+        this.value = initial;
     }
 
-    synchronized public void P() {
+    synchronized public void P(int n) {
         while(value == 0){
             try{
                 System.out.println("Cannot add another basket");
@@ -25,11 +25,11 @@ public class Semaphore {
             }
         }
         value--;
-        System.out.println("Semaphore_P: " + value);
+        System.out.println("Semaphore_" + n + "_P: " + value);
     }
-    synchronized public void V(){
+    synchronized public void V(int n){
         value++;
-        System.out.println("Semaphore_V: " + value);
+        System.out.println("Semaphore_" + n + "_V: " + value);
         notifyAll();
     }
 }

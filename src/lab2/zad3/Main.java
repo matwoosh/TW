@@ -9,8 +9,8 @@ package lab2.zad3;
 public class Main {
     public static void main(String[] args) {
 
-        int value = 8;
-        int threadsNo = 50;
+        int value = 5;
+        int threadsNo = 10;
 
         Semaphore s1 = new Semaphore(value);
         Semaphore s2 = new Semaphore(0);
@@ -18,7 +18,7 @@ public class Main {
         Shop shop = new Shop(s1, s2);
 
         for (int x = 0; x < threadsNo; x++) {
-            Customer c = new Customer(100, shop);
+            Customer c = new Customer(100, shop, x);
             c.start();
         }
         

@@ -16,7 +16,7 @@ public class PrintingMonitor {
     List<Boolean> available_printers;
 
     public PrintingMonitor(int m) {
-        available_printers = new ArrayList<Boolean>();
+        available_printers = new ArrayList<>();
         for (int i=0; i<m; i++) {
             available_printers.add(true);
             System.out.println("Printer " + i + " has been created.");

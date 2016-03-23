@@ -9,13 +9,13 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class PrintingMonitor {
+public class Monitor {
 
     private Lock lock = new ReentrantLock();
     private Condition not_full = lock.newCondition();
     List<Boolean> available_printers;
 
-    public PrintingMonitor(int m) {
+    public Monitor(int m) {
         available_printers = new ArrayList<>();
         for (int i=0; i<m; i++) {
             available_printers.add(true);
@@ -28,7 +28,7 @@ public class PrintingMonitor {
         lock.lock();
         while ((printer_no = available_printers.indexOf(true)) == -1) {
             // All printers have been reserved
-            System.out.println("All printers have been reserved");
+            System.out.println("All printers have been reserved!!!");
             try {
                 not_full.await();
             } catch (InterruptedException e) {}

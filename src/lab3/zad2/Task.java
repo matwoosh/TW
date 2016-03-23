@@ -3,12 +3,12 @@ package lab3.zad2;
 /**
  * Created by Mateusz on 16/03/2016.
  */
-public class Job implements Runnable {
+public class Task implements Runnable {
 
     private int id;
-    private PrintingMonitor monitor;
+    private Monitor monitor;
 
-    public Job(int id, PrintingMonitor monitor) {
+    public Task(int id, Monitor monitor) {
         this.id = id;
         this.monitor = monitor;
         System.out.println("Task "+id+" has been created.");

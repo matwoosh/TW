@@ -1,18 +1,23 @@
 package lab4.zad1;
 
-public class Consumer implements Runnable {
-    private Buffer buffer;
-
-    public Consumer(Buffer buffer) {
+/**
+ * Created by oswin on 22.03.16.
+ */
+public class Worker implements  Runnable {
+    int id;
+    Buffer buffer;
+    Worker(Buffer buffer, int id){
+        this.id = id;
         this.buffer = buffer;
     }
 
     public void run() {
 
-        while( true ) {
+
+        while( true ){
             try {
-                System.out.println("\t CONSUME!!");
-                buffer.consume();
+                System.out.println("\t WORK!!");
+                buffer.work(id);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -21,4 +26,6 @@ public class Consumer implements Runnable {
             } catch (InterruptedException e) {}
         }
     }
+
+
 }

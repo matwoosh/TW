@@ -1,10 +1,27 @@
 package lab4.zad1;
 
-/**
- * Created by Mateusz on 23/03/2016.
- */
-public class Producer {
-    //Czerwona ksiazeczka zawiera rozwiązanie
+public class Producer implements Runnable {
+    private Buffer buffer;
 
-    //kazdy proces ma swoj semafor licznikowy
+
+    Producer(Buffer buffer){
+        this.buffer = buffer;
+    }
+    public void run() {
+
+
+        while( true ){
+            try {
+                System.out.println("\t PRODUCE!");
+                buffer.produce();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {}
+        }
+    }
 }
+
+

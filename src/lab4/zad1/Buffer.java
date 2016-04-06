@@ -15,49 +15,38 @@ public class Buffer {
     int[] buffer;
     int[] positions;
 
-    Buffer(int N, int M){
+    Buffer(int N, int M) {
         this.N = N;
         this.M = M;
         curr = 0;
         conditions = new Condition[M];
         buffer = new int[N];
         positions = new int[M];
-        for(int i = 0; i<M; i++){
+        for (int i = 0; i < M; i++) {
             conditions[i] = lock.newCondition();
             positions[i] = 0;
-         }
-        positions[M-1] = 0; //consumer
+        }
+        positions[M - 1] = 0; //consumer
 
-        for(int i = 0; i<N; i++){
+        for (int i = 0; i < N; i++) {
             buffer[i] = -1;
         }
 
     }
 
-    void processBuffer(int id){
-        if(id == 0){
-            buffer[positions[id]] ++;
+    public void produce() throws InterruptedException {
+        lock.lock();
+        try {
+            while(buffer[(positions[0]%N)] != -1)
+                conditions[M-1].await();
+            buffer[positions[0]] ++;
             System.out.println("Producer processed buffer[" + positions[0] +"]");
             positions[0]++;
             positions[0] = positions[0]%N;
-
+            conditions[1].signal();
+        } finally {
+            lock.unlock();
         }
-        if(id == M){
-            System.out.println("Consumer taked value "+buffer[positions[M-1]%N]+" from buffer["+ positions[M-1]%N+  "]");
-            buffer[positions[M-1]] = -1;
-            positions[M-1]++;
-            positions[M-1] = positions[M-1]%N;
-            conditions[0].signal();
-
-        }
-
-        else{
-            buffer[positions[id]]++;
-            System.out.println("Process nr: "+id+" changed buffer["+ positions[id]+  "] to: " +buffer[positions[id]]);
-            positions[id]++;
-            positions[id] = positions[id]%N;
-        }
-
     }
 
     public void work( int id) throws InterruptedException {
@@ -85,36 +74,19 @@ public class Buffer {
         }
     }
 
-
-
     public void consume() throws InterruptedException {
         lock.lock();
         try {
             while( positions[M-1] > positions[0]) {
                 conditions[M-1].await();
             }
-            System.out.println("Consumer taked value "+buffer[positions[M-1]%N]+" from buffer["+ positions[M-1]%N+  "]");
+            System.out.println("Consumer took value "+buffer[positions[M-1]%N]+" from buffer["+ positions[M-1]%N+  "]");
             buffer[positions[M-1]] = -1;
             positions[M-1]++;
             positions[M-1] = positions[M-1]%N;
             conditions[0].signal();
 
 
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    public void produce() throws InterruptedException {
-        lock.lock();
-        try {
-            while(buffer[(positions[0]%N)] != -1)
-                conditions[M-1].await();
-            buffer[positions[0]] ++;
-            System.out.println("Producer processed buffer[" + positions[0] +"]");
-            positions[0]++;
-            positions[0] = positions[0]%N;
-            conditions[1].signal();
         } finally {
             lock.unlock();
         }

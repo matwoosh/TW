@@ -8,16 +8,15 @@ public class Consumer implements Runnable {
     }
 
     public void run() {
-
-        while( true ) {
+        while(true) {
             try {
-                System.out.println("\t CONSUME!!");
+                System.out.println("\t Consuming!");
                 buffer.consume();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {}
         }
     }

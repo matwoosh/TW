@@ -10,7 +10,7 @@ public class Producer implements Runnable {
     public void run() {
         while(true) {
             try {
-                System.out.println("\t Producing...");
+                System.out.println(" Producing...");
                 buffer.produce();
             } catch (InterruptedException e) {
                 e.printStackTrace();

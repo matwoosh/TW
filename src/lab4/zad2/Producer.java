@@ -20,7 +20,7 @@ public class Producer implements Runnable {
         for (int i = 0; i < 1; i++) {
             try {
                 amount = generator.nextInt(M)+1;
-                System.out.println("\tproducer nr " + id +" wants to put " + amount);
+                System.out.println(" Producer " + id +" wants to put " + amount);
                 buffer.put(amount);
             } catch (InterruptedException e) {
                 e.printStackTrace();

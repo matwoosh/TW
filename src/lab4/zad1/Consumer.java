@@ -10,7 +10,7 @@ public class Consumer implements Runnable {
     public void run() {
         while(true) {
             try {
-                System.out.println("\t Consuming!");
+                System.out.println(" Consuming!");
                 buffer.consume();
             } catch (InterruptedException e) {
                 e.printStackTrace();

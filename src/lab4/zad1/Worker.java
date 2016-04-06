@@ -12,7 +12,7 @@ public class Worker implements  Runnable {
     public void run() {
         while(true) {
             try {
-                System.out.println("\t Working...");
+                System.out.println(" Working...");
                 buffer.work(id);
             } catch (InterruptedException e) {
                 e.printStackTrace();

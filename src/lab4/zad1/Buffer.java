@@ -60,7 +60,7 @@ public class Buffer {
         }
 
             buffer[positions[id]]++;
-            System.out.println("Process nr: "+id+" changed buffer["+ positions[id]+  "] to: " +buffer[positions[id]]);
+            System.out.println("Process nr "+id+" changed buffer["+ positions[id]+  "] to " +buffer[positions[id]]);
 
         try{
             lock.lock();

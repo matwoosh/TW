@@ -28,7 +28,7 @@ public class Buffer {
     public void put(int amount) throws InterruptedException {
         lock.lock();
         try {
-            //sprawdzic, czy ktos juz czeka
+            //check, if anybody is waiting
             if(firstProdWaits)
                 restProd.await();
 
@@ -38,11 +38,11 @@ public class Buffer {
             }
             //if there is a place
             for(int i=0; i<amount; i++){
-                System.out.println( "zapisywanie w " + (start + inBuffer)% (2*M));
+                System.out.println( "Saving in buffer" + (start + inBuffer)% (2*M));
                 items[ (start + inBuffer)% (2*M)] = 1;
                 inBuffer++;
             }
-            System.out.println("IN BUFFER: " + inBuffer);
+            System.out.println(" In buffer: " + inBuffer);
             restProd.signal();
             firstCons.signal();
 
@@ -54,7 +54,7 @@ public class Buffer {
     public void take(int amount ) throws InterruptedException {
         lock.lock();
         try {
-            //sprawdzic, czy jakis konsument czeka
+            //check if any consumer is waiting
             if(firstConsWaits)
                 restCons.await();
 
@@ -62,14 +62,14 @@ public class Buffer {
                 firstCons.await();
                 firstConsWaits = true;
             }
-            //mozna wziac
+            //can take
             for( int i=0; i< amount; i++){
-                System.out.println("Zwalnianie w " + start%(2*M));
+                System.out.println("Releasing buffer " + start%(2*M));
                 items[start%(2*M)] = 0;
                 inBuffer--;
                 start++;
             }
-            System.out.println("IN BUFFER: " + inBuffer);
+            System.out.println(" In buffer: " + inBuffer);
             if(start >= 2*M )
                 start = start%(2*M);
 

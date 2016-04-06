@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Consumer implements Runnable {
     private Buffer buffer;
-    int amount, id, M;
+    int id, M;
 
     public Consumer(Buffer buffer, int id) {
         this.buffer = buffer;
@@ -21,7 +21,7 @@ public class Consumer implements Runnable {
         for (int i=0; i<1; i++) {
             try {
                 amount = generator.nextInt(M)+1;
-                System.out.println("\tconsumer nr " + id +" wants to take "+ amount);
+                System.out.println(" Consumer " + id +" wants to take "+ amount);
                 buffer.take(amount);
             } catch (InterruptedException e) {
                 e.printStackTrace();

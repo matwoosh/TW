@@ -3,21 +3,21 @@ import java.util.Random;
 
 public class Producer implements Runnable {
     private Buffer buffer;
-    int M, id;
+    private int M, id;
 
     public Producer(Buffer buffer,int id) {
         this.buffer = buffer;
         this.M = buffer.size();
         this.id = id;
     }
-    public int getId(){ return this.id;
+    public int getId(){
+        return this.id;
     }
 
     public void run() {
-
         Random generator = new Random();
         int amount;
-        for (int i = 0; i < 1; i++) {
+        while(true){
             try {
                 amount = generator.nextInt(M)+1;
                 System.out.println(" Producer " + id +" wants to put " + amount);
@@ -27,7 +27,7 @@ public class Producer implements Runnable {
             }
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {}
         }
     }

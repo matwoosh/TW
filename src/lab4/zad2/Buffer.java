@@ -4,15 +4,15 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Buffer {
-    final Lock lock = new ReentrantLock();
-    final Condition firstProd  = lock.newCondition();
-    final Condition firstCons = lock.newCondition();
-    final Condition restProd  = lock.newCondition();
-    final Condition restCons = lock.newCondition();
-    Boolean firstProdWaits, firstConsWaits;
+    private final Lock lock = new ReentrantLock();
+    private final Condition firstProd  = lock.newCondition();
+    private final Condition firstCons = lock.newCondition();
+    private final Condition restProd  = lock.newCondition();
+    private final Condition restCons = lock.newCondition();
+    private Boolean firstProdWaits, firstConsWaits;
 
-    final Integer[] items;
-    int M, inBuffer, start;
+    private final Integer[] items;
+    private int M, inBuffer, start;
 
     Buffer(int M){
         this.M = M;
@@ -31,11 +31,11 @@ public class Buffer {
             //check, if anybody is waiting
             if(firstProdWaits)
                 restProd.await();
-
+            firstProdWaits = true;
             while( 2*M - inBuffer < amount) {
                 firstProd.await();
-                firstProdWaits = true;
             }
+//            inBuffer += amount;
             //if there is a place
             for(int i=0; i<amount; i++){
                 System.out.println( "Saving in buffer" + (start + inBuffer)% (2*M));
@@ -43,6 +43,7 @@ public class Buffer {
                 inBuffer++;
             }
             System.out.println(" In buffer: " + inBuffer);
+            firstProdWaits = false;
             restProd.signal();
             firstCons.signal();
 
@@ -57,12 +58,12 @@ public class Buffer {
             //check if any consumer is waiting
             if(firstConsWaits)
                 restCons.await();
-
+            firstConsWaits = true;
             while(inBuffer < amount) {
                 firstCons.await();
-                firstConsWaits = true;
             }
-            //can take
+//            inBuffer -= amount;
+//            can take
             for( int i=0; i< amount; i++){
                 System.out.println("Releasing buffer " + start%(2*M));
                 items[start%(2*M)] = 0;
@@ -72,7 +73,7 @@ public class Buffer {
             System.out.println(" In buffer: " + inBuffer);
             if(start >= 2*M )
                 start = start%(2*M);
-
+            firstConsWaits = false;
             restCons.signal();
             firstProd.signal();
 

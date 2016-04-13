@@ -1,7 +1,7 @@
 package lab4.zad1;
 
 public class Main {
-    private final static int N = 10; //buffer size
+    private final static int N = 100; //buffer size
     private final static int M = 10; //processes number
     private final static int W = 8;
 

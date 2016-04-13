@@ -4,21 +4,17 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Buffer {
-    final Lock lock = new ReentrantLock();
-    final Condition[] conditions;
-    final Condition producer = lock.newCondition();
-    final Condition consumer = lock.newCondition();
+    private final Lock lock = new ReentrantLock();
+    private final Condition[] conditions;
 
-    final int N; //buffer size
-    final int M; //processes amount;
-    int curr;
-    int[] buffer;
-    int[] positions;
+    private final int N; //buffer size
+    private final int M; //processes amount
+    private int[] buffer;
+    private int[] positions;
 
     Buffer(int N, int M) {
         this.N = N;
         this.M = M;
-        curr = 0;
         conditions = new Condition[M];
         buffer = new int[N];
         positions = new int[M];
@@ -59,8 +55,8 @@ public class Buffer {
             lock.unlock();
         }
 
-            buffer[positions[id]]++;
-            System.out.println("Process nr "+id+" changed buffer["+ positions[id]+  "] to " +buffer[positions[id]]);
+        buffer[positions[id]]++;
+        System.out.println("Process nr "+id+" changed buffer["+ positions[id]+  "] to " +buffer[positions[id]]);
 
         try{
             lock.lock();
@@ -78,7 +74,9 @@ public class Buffer {
         lock.lock();
         try {
             while( positions[M-1] > positions[0]) {
+
                 conditions[M-1].await();
+
             }
             System.out.println("Consumer took value "+buffer[positions[M-1]%N]+" from buffer["+ positions[M-1]%N+  "]");
             buffer[positions[M-1]] = -1;

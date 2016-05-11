@@ -15,7 +15,7 @@ public class TakeMethodRequest extends MethodRequest {
 
     @Override
     void call() {
-        Object o=buffor.take();
+        Object o = buffor.take();
         future.set(o);
     }
 }

@@ -3,6 +3,7 @@ package lab6;
 /**
  * Created by Mateusz on 11/05/2016.
  */
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -11,7 +12,7 @@ public class Scheduler extends Thread {
 
 
     @SuppressWarnings("deprecation")
-    synchronized void done(){
+    synchronized void done() {
         //stop();
     }
 

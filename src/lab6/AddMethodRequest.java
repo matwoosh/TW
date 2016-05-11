@@ -5,14 +5,15 @@ package lab6;
  */
 public class AddMethodRequest extends MethodRequest {
     Object o;
+
     public AddMethodRequest(Future<Object> f, ServantBuffer b, Object o) {
         super(f, b);
-        this.o=o;
+        this.o = o;
     }
 
     @Override
     boolean guard() {
-        return! buffor.full_p();
+        return !buffor.full_p();
     }
 
     @Override

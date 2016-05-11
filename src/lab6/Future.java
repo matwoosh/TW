@@ -12,8 +12,8 @@ public class Future <T>{
         while(!done){
             try {
                 wait();
+
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

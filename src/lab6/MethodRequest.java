@@ -9,9 +9,10 @@ public abstract class MethodRequest {
 
     public MethodRequest(Future<Object> f, ServantBuffer b) {
         buffor = b;
-        future=f;
+        future = f;
     }
 
     abstract boolean guard();
+
     abstract void call();
 }

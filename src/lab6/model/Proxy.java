@@ -26,11 +26,8 @@ public class Proxy {
         return fut;
     }
 
-    public void printBuffor() {
-        buffer.printBuffor();
+    public void printBuffer() {
+        buffer.printBuffer();
     }
 
-    public void done() {
-        scheduler.done();
-    }
 }

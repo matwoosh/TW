@@ -39,15 +39,11 @@ public class Runner {
         }
     }
 
-    private void cleanUp() {
-        buf.done();
-    }
-
     public static void run(int bufSize, int workerCount, int workAmount) {
         Runner r = new Runner(bufSize, workerCount, workAmount);
         r.startAll();
         r.joinAll();
-        r.cleanUp();
+
         System.out.println(bufSize + " " + workerCount + " " + workAmount);
     }
 }

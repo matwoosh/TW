@@ -10,11 +10,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Scheduler extends Thread {
     private BlockingQueue<MethodRequest> queue = new LinkedBlockingQueue<>();
 
-    @SuppressWarnings("deprecation")
-    synchronized void done() {
-        //stop();
-    }
-
     public Scheduler() {
         start();
     }
@@ -24,14 +19,13 @@ public class Scheduler extends Thread {
         while (true) {
             try {
                 mr = queue.take();
-                synchronized (mr) {
-                    if (mr.guard()) {
-                        mr.call();
+                if (mr.guard()) {
+                    mr.call();
 
-                    } else {
-                        queue.add(mr);
-                    }
+                } else {
+                    queue.add(mr);
                 }
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

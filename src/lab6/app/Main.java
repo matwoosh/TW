@@ -1,7 +1,5 @@
 package lab6.app;
 
-import lab6.model.Proxy;
-
 import static lab6.app.Runner.run;
 
 /**
@@ -11,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         int workAmount = 100000;
 
-        for (int bufSize = 10; bufSize <= 800; bufSize += 20) {
+        for (int bufSize = 10; bufSize <= 810; bufSize += 100) {
             for (int workerCount = 1; workerCount <= 20; workerCount++) {
                 run(bufSize, workerCount, workAmount);
             }

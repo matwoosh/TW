@@ -32,7 +32,7 @@ public class Servant {
         return res;
     }
 
-    public void printBuffor() {
+    public void printBuffer() {
         System.out.print("BUFOR: ");
         for (int i = 0; i <= fillPointer; i++) {
             System.out.print(buffer[i] + " ");

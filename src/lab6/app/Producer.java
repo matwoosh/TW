@@ -1,4 +1,6 @@
-package lab6;
+package lab6.app;
+
+import lab6.model.Proxy;
 
 /**
  * Created by Mateusz on 11/05/2016.
@@ -15,7 +17,7 @@ public class Producer extends Thread {
 
     public void run() {
         while (produceCount < maxProduceCount) {
-            buf.add("RZECZ W BUFORZE");
+            buf.add("Some buffer stuff");
             produceCount++;
         }
     }

@@ -1,14 +1,14 @@
-package lab6;
+package lab6.model;
 
 /**
  * Created by Mateusz on 11/05/2016.
  */
 public abstract class MethodRequest {
-    protected ServantBuffer buffor;
+    protected Servant buffer;
     protected Future<Object> future;
 
-    public MethodRequest(Future<Object> f, ServantBuffer b) {
-        buffor = b;
+    public MethodRequest(Future<Object> f, Servant b) {
+        buffer = b;
         future = f;
     }
 

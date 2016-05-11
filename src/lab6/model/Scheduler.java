@@ -1,4 +1,4 @@
-package lab6;
+package lab6.model;
 
 /**
  * Created by Mateusz on 11/05/2016.
@@ -8,8 +8,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Scheduler extends Thread {
-    private BlockingQueue<MethodRequest> queue = new LinkedBlockingQueue<MethodRequest>();
-
+    private BlockingQueue<MethodRequest> queue = new LinkedBlockingQueue<>();
 
     @SuppressWarnings("deprecation")
     synchronized void done() {
@@ -40,7 +39,7 @@ public class Scheduler extends Thread {
     }
 
     public void enqueue(MethodRequest mr) {
-        //System.out.println("Dostałem zadanie " + mr.getClass().toString());
+        //System.out.println("Received task " + mr.getClass().toString());
         queue.add(mr);
     }
 }

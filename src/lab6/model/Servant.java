@@ -1,14 +1,14 @@
-package lab6;
+package lab6.model;
 
 /**
  * Created by Mateusz on 11/05/2016.
  */
-public class ServantBuffer {
-    private Object[] bufor;
+public class Servant {
+    private Object[] buffer;
     private int fillPointer;
 
-    public ServantBuffer(int size) {
-        bufor = new Object[size];
+    public Servant(int size) {
+        buffer = new Object[size];
         fillPointer = -1;
     }
 
@@ -17,17 +17,17 @@ public class ServantBuffer {
     }
 
     public boolean full_p() {
-        return fillPointer == (bufor.length - 1);
+        return fillPointer == (buffer.length - 1);
     }
 
 
     public void add(Object n) {
         fillPointer++;
-        bufor[fillPointer] = n;
+        buffer[fillPointer] = n;
     }
 
     public Object take() {
-        Object res = bufor[fillPointer];
+        Object res = buffer[fillPointer];
         fillPointer--;
         return res;
     }
@@ -35,7 +35,7 @@ public class ServantBuffer {
     public void printBuffor() {
         System.out.print("BUFOR: ");
         for (int i = 0; i <= fillPointer; i++) {
-            System.out.print(bufor[i] + " ");
+            System.out.print(buffer[i] + " ");
         }
         System.out.println();
     }

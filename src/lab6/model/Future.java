@@ -1,4 +1,4 @@
-package lab6;
+package lab6.model;
 
 /**
  * Created by Mateusz on 11/05/2016.

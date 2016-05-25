@@ -11,11 +11,16 @@ public class Future<T> {
         while (!done) {
             try {
                 wait();
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         return result;
+    }
+
+    synchronized public boolean done_p() {
+        return done;
     }
 
     synchronized void set(T result) {

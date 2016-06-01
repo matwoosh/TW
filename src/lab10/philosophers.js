@@ -257,6 +257,6 @@ for (var i = 0; i < N; i++) {
 
 for (var i = 0; i < N; i++) {
     // philosophers[i].startNaive(10);
-    //philosophers[i].startAsym(10);
-     philosophers[i].startConductor(10);
+    // philosophers[i].startAsym(10);
+    philosophers[i].startConductor(10);
 }
